@@ -1,0 +1,212 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> For pbc/devtest</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Welcome Demo API</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<div class="container mt-3">
+  <h2>API DOCUMENTATIONS</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Getting Panel Provider Price</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Getting Target Group By country_code</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Getting Location By country_code</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu3">Some Other Related Apis</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>Method: GET (Private)</h1>
+          <h5>URL: http://127.0.0.1:8000/api/panelprice/alb001/1/</h5>
+          <h5>Params: country_code , target_group_id </h5>
+           <p>This Api Is Authenticated</p>
+           <p>username:panelviewer</p>
+           <p>password:panel1234</p>
+        </div>
+        <div class="col-sm-6">
+          <code><pre>{
+            "status": 200,
+            "results": {
+                "panel": "pn1",
+                "price": 4.25
+            }
+        }</pre></code>
+        </div>
+      </div>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>Method: GET</h1>
+          <h5>URL: http://127.0.0.1:8000/api/public/targetgroup/alb001/</h5>
+          <h5>Params: country_code </h5>
+
+          <hr>
+          <h1>Method: GET (Private)</h1>
+          <h5>URL: http://127.0.0.1:8000/api/private/targetgroup/alb001/</h5>
+          <h5>Params: country_code </h5>
+          <p>This Api Is Authenticated</p>
+          <p>username:panelviewer</p>
+          <p>password:panel1234</p>
+
+        </div>
+        <div class="col-sm-6">
+
+          <code><pre>{
+            "id": 1,
+            "name": "albania",
+            "country_code": "alb001",
+            "panel_provider_id": 4,
+            "targetgroups": [
+                {
+                    "id": 1,
+                    "name": "domicile",
+                    "parent_id": null,
+                    "external_id": 1,
+                    "secret_code": "dom_alb",
+                    "panel_provider_id": 4,
+                    "subtargetgroups": [
+                        {
+                            "id": 5,
+                            "name": "indian_domiciles",
+                            "parent_id": 1,
+                            "external_id": null,
+                            "secret_code": "for_ind_domicile",
+                            "panel_provider_id": 5
+                        },
+                        {
+                            "id": 6,
+                            "name": "albania_domiciles",
+                            "parent_id": 1,
+                            "external_id": null,
+                            "secret_code": "for_ind_domicile",
+                            "panel_provider_id": 4
+                        },
+                        {
+                            "id": 7,
+                            "name": "uk_domiciles",
+                            "parent_id": 1,
+                            "external_id": null,
+                            "secret_code": "for_uk_domicile",
+                            "panel_provider_id": 6
+                        }
+                    ]
+                }
+            ]
+        }</pre></code>
+        </div>
+      </div>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>Method: GET</h1>
+          <h5>URL: http://127.0.0.1:8000/api/public/location/country_code/</h5>
+          <h5>Params: country_code </h5>
+
+          <hr>
+        <h1>Method: GET (Private)</h1>
+        <h5>URL: http://127.0.0.1:8000/api/private/location/country_code/</h5>
+        <h5>Params: country_code </h5>
+        <p>This Api Is Authenticated</p>
+        <p>username:panelviewer</p>
+        <p>password:panel1234</p>
+        </div>
+
+        <div class="col-sm-6">
+
+          <code><pre>{
+            "id": 1,
+            "name": "albania",
+            "country_code": "alb001",
+            "panel_provider_id": 4,
+            "locationgroups": [
+                {
+                    "id": 1,
+                    "name": "expensive",
+                    "country_id": 1,
+                    "panel_provider_id": 4,
+                    "locations": [
+                        {
+                            "id": 6,
+                            "name": "albania city",
+                            "secret_code": "alb_in_001",
+                            "external_id": 1
+                        },
+                        {
+                            "id": 7,
+                            "name": "zurkinersich",
+                            "secret_code": "alb_in_002",
+                            "external_id": 1
+                        }
+                    ]
+                }
+            ]
+        }</pre></code>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane container" id="menu3">
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Getting All Panel Related Informations</p>
+          <h1>Method: GET</h1>
+          <h5>URL: http://127.0.0.1:8000/api/panels/</h5>
+        </div>
+        <div class="col-sm-6">
+          <p>Geting All Countries Related Informations</p>
+          <h1>Method: GET</h1>
+          <h5>URL: http://127.0.0.1:8000/api/countries/</h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Getting All Target Groups </p>
+          <h1>Method: GET</h1>
+          <h5>URL: http://127.0.0.1:8000/api/targetgroups/</h5>
+        </div>
+        <div class="col-sm-6">
+          <p>Getting All Subtarget Groups Linked With Respective Target Groups</p>
+          <h1>Method: GET</h1>
+          <h5>URL: http://127.0.0.1:8000/api/target/subtargets/</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
