@@ -27,7 +27,7 @@ SECRET_KEY = 'rr8r*f_#f0l%7fy(egq(@gbp1+u4-w81un3ju0$(um(3bfrk2_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,8 +134,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'DEBUG')
 
 logger = logging.getLogger()
 logger.setLevel(LOG_LEVEL)
 django_heroku.settings(locals())
+
+
